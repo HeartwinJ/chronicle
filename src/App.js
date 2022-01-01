@@ -1,10 +1,35 @@
+import { Route, Routes } from "react-router-dom";
+import AuthProvider from "./components/AuthProvider";
+import ProtectedRoute from "./components/ProtectedRoute";
+import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
+import RecordEditorPage from "./pages/RecordEditorPage";
 
 function App() {
   return (
-    <div className="w-screen h-screen font-['Poppins']">
-      <LoginPage />
-    </div>
+    <AuthProvider>
+      <div className="w-screen h-screen font-['Poppins']">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/editor"
+            element={
+              <ProtectedRoute>
+                <RecordEditorPage />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </div>
+    </AuthProvider>
   );
 }
 
