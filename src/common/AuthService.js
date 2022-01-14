@@ -1,14 +1,16 @@
 import axios from "axios";
 
+const baseUrl = "http://localhost:3001/api";
+
 const signIn = (password) => {
-  return axios.post("http://localhost:3001/api/auth/login", {
+  return axios.post(`${baseUrl}/auth/login`, {
     password: password,
   });
 };
 
 const updateAuth = () => {
   return axios.post(
-    "http://localhost:3001/api/auth/refresh",
+    `${baseUrl}/auth/refresh`,
     {},
     {
       headers: {
