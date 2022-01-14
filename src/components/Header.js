@@ -1,15 +1,11 @@
 import { LogoutIcon } from "@heroicons/react/outline";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../common/AuthContext";
 
 function Header() {
   let auth = useAuth();
-  let navigate = useNavigate();
 
   function logout() {
-    auth.signOut(() => {
-      navigate('/');
-    });
+    auth.signOut();
   }
 
   return (

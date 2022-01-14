@@ -1,17 +1,18 @@
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useAuth } from "../common/AuthContext";
 
 function LoginPage() {
   let auth = useAuth();
-	let navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
     const password = new FormData(event.currentTarget).get("password");
 
-		auth.signIn(password, () => {
-			navigate('/', {replace: true});
-		});
+    auth.signIn(password);
+  }
+
+  if (auth.checkAuth()) {
+    return <Navigate to="/" replace />;
   }
 
   return (

@@ -25,7 +25,7 @@ function DashboardPage() {
         </button>
       </div>
       <div className="grid grid-cols-2 gap-2 p-4">
-				{records.map((val) => <RecordCard title={val.title} date={val.date} />)}
+				{records.map((val, index) => <RecordCard key={index} title={val.title} date={val.date} />)}
       </div>
     </div>
   );
