@@ -1,16 +1,28 @@
 import { PlusIcon } from "@heroicons/react/outline";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import PostsService from "../common/PostsService";
 import Header from "../components/Header";
+import Loader from "../components/Loader";
 import RecordCard from "../components/RecordCard";
 
 function DashboardPage() {
-  function addRecord() {}
+  const navigate = useNavigate();
 
-  let records = [
-    { title: "Test Record 1", date: "25-12-2021" },
-    { title: "Test Record 2", date: "30-12-2021" },
-    { title: "Test Record 3", date: "01-01-2022" },
-    { title: "Test Record 4", date: "02-01-2022" },
-  ];
+  function addRecord() {
+    navigate("/editor");
+  }
+
+  const [isLoading, setLoading] = useState(true);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    console.log("useEffect!");
+    PostsService.getAllPosts().then((response) => {
+      setPosts(response.data.posts);
+      setLoading(false);
+    });
+  }, []);
 
   return (
     <div className="bg-neutral-800 h-full">
@@ -24,9 +36,15 @@ function DashboardPage() {
           <span>Add</span>
         </button>
       </div>
-      <div className="grid grid-cols-2 gap-2 p-4">
-				{records.map((val, index) => <RecordCard key={index} title={val.title} date={val.date} />)}
-      </div>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="grid grid-cols-2 gap-2 p-4">
+          {posts.map((val, index) => (
+            <RecordCard key={index} title={val.title} date={val.timestamp} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
