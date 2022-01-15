@@ -28,10 +28,18 @@ const addPost = (title, content) => {
   );
 };
 
-const editPost = (postId, postData) => {
-  return axios.put(`${baseUrl}/posts/${postId}`, postData, {
-    headers: { "auth-token": localStorage.getItem("auth-token") },
-  });
+const editPost = (postId, title, content) => {
+  return axios.put(
+    `${baseUrl}/posts/${postId}`,
+    {
+      title: title,
+      content: content,
+      timestamp: Date.now(),
+    },
+    {
+      headers: { "auth-token": localStorage.getItem("auth-token") },
+    }
+  );
 };
 
 const deletePost = (postId) => {
