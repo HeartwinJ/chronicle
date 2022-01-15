@@ -17,7 +17,6 @@ function DashboardPage() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    console.log("useEffect!");
     PostsService.getAllPosts().then((response) => {
       setPosts(response.data.posts);
       setLoading(false);

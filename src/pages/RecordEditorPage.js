@@ -3,12 +3,15 @@ import MdEditor from "react-markdown-editor-lite";
 import Header from "../components/Header";
 import { SaveIcon, TrashIcon } from "@heroicons/react/outline";
 
-import "react-markdown-editor-lite/lib/index.css";
+import "../common/ReactEditorStyles.css";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function RecordEditorPage() {
   const mdParser = MarkdownIt();
   const navigate = useNavigate();
+
+  const [editorVal, setEditorVal] = useState("");
 
   function onImageUpload(file) {
     return new Promise((resolve) => {
@@ -20,11 +23,17 @@ function RecordEditorPage() {
     });
   }
 
+  function handleEditorChange({ html, text }) {
+    setEditorVal(text);
+  }
+
   function handleCancel() {
     navigate("/", { replace: true });
   }
 
-  function handleSave() {}
+  function handleSave() {
+    console.log(editorVal);
+  }
 
   return (
     <div className="bg-neutral-800 h-full flex flex-col">
@@ -34,6 +43,8 @@ function RecordEditorPage() {
           className="h-full"
           renderHTML={(text) => mdParser.render(text)}
           onImageUpload={onImageUpload}
+          value={editorVal}
+          onChange={handleEditorChange}
         />
       </div>
       <div className="flex justify-end p-3">
