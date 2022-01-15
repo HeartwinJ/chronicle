@@ -23,6 +23,19 @@ function DashboardPage() {
     });
   }, []);
 
+  function handleEdit(postId) {
+    navigate("/editor", { state: { id: postId } });
+  }
+
+  function handleDelete(postId, index) {
+    PostsService.deletePost(postId).then(() => {
+      navigate("/", { replace: true });
+      posts.splice(index, 1);
+      const newPostsList = posts.slice();
+      setPosts(newPostsList);
+    });
+  }
+
   return (
     <div className="bg-neutral-800 h-full">
       <Header />
@@ -39,9 +52,17 @@ function DashboardPage() {
         <Loader />
       ) : (
         <div className="grid grid-cols-2 gap-2 p-4">
-          {posts.map((val, index) => (
-            <RecordCard key={index} data={val} />
-          ))}
+          {posts.map((val, index) => {
+            return (
+              <RecordCard
+                key={index}
+                index={index}
+                data={val}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+              />
+            );
+          })}
         </div>
       )}
     </div>

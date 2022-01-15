@@ -1,14 +1,13 @@
 import { PencilIcon, TrashIcon } from "@heroicons/react/outline";
-import { useNavigate } from "react-router-dom";
 
 function RecordCard(props) {
-  const navigate = useNavigate();
-
   function handleEdit() {
-    navigate("/editor", { state: { id: props.data.id } });
+    props.onEdit(props.data.id);
   }
 
-  function handleDelete() {}
+  function handleDelete() {
+    props.onDelete(props.data.id, props.index);
+  }
 
   return (
     <div className="text-white bg-neutral-700 p-2 rounded-xl flex justify-around items-center">
