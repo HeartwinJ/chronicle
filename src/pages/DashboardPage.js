@@ -40,7 +40,11 @@ function DashboardPage() {
       ) : (
         <div className="grid grid-cols-2 gap-2 p-4">
           {posts.map((val, index) => (
-            <RecordCard key={index} title={val.title} date={val.timestamp} />
+            <RecordCard
+              key={index}
+              title={val.title}
+              date={new Date(val.timestamp).toDateString()}
+            />
           ))}
         </div>
       )}

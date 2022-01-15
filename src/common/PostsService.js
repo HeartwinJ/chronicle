@@ -14,10 +14,18 @@ const getPost = (postId) => {
   });
 };
 
-const addPost = (postData) => {
-  return axios.post(`${baseUrl}/posts`, postData, {
-    headers: { "auth-token": localStorage.getItem("auth-token") },
-  });
+const addPost = (title, content) => {
+  return axios.post(
+    `${baseUrl}/posts`,
+    {
+      title: title,
+      content: content,
+      timestamp: Date.now(),
+    },
+    {
+      headers: { "auth-token": localStorage.getItem("auth-token") },
+    }
+  );
 };
 
 const editPost = (postId, postData) => {
