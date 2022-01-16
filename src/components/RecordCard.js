@@ -15,10 +15,13 @@ function RecordCard(props) {
 
   return (
     <div className="text-white bg-neutral-700 px-4 py-2 rounded-xl flex justify-between">
-      <div className="grow flex justify-between items-center" onClick={handleSelect}>
+      <div
+        className="grow flex justify-between items-center"
+        onClick={handleSelect}
+      >
         <span className="text-lg text-ellipsis">{props.data.title}</span>
         <span className="text-xs whitespace-nowrap">
-          {new Date(props.data.timestamp).toDateString()}
+          {new Date(parseInt(props.data.timestamp)).toDateString()}
         </span>
       </div>
       <div className="flex flex-nowrap">
