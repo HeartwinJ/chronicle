@@ -1,5 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  ::-webkit-scrollbar {
+    width: 8px;
+		height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #424242;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #323232;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #383838;
+  }
+	::-webkit-scrollbar-corner {
+		background: #565656;
+	}
+}
