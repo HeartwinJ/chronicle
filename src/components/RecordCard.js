@@ -1,6 +1,10 @@
 import { PencilIcon, TrashIcon } from "@heroicons/react/outline";
 
 function RecordCard(props) {
+  function handleSelect() {
+    props.onSelect(props.data.id);
+  }
+
   function handleEdit() {
     props.onEdit(props.data.id);
   }
@@ -10,7 +14,10 @@ function RecordCard(props) {
   }
 
   return (
-    <div className="text-white bg-neutral-700 p-2 rounded-xl flex justify-around items-center">
+    <div
+      className="text-white bg-neutral-700 p-2 rounded-xl flex justify-around items-center"
+      onClick={handleSelect}
+    >
       <span className="text-lg">{props.data.title}</span>
       <span className="text-xs">
         {new Date(props.data.timestamp).toDateString()}

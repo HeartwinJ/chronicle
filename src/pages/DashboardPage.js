@@ -23,6 +23,10 @@ function DashboardPage() {
     });
   }, []);
 
+  function handleSelect(postId) {
+    navigate("/view", { state: { id: postId } });
+  }
+
   function handleEdit(postId) {
     navigate("/editor", { state: { id: postId } });
   }
@@ -58,6 +62,7 @@ function DashboardPage() {
                 key={index}
                 index={index}
                 data={val}
+                onSelect={handleSelect}
                 onEdit={handleEdit}
                 onDelete={handleDelete}
               />

@@ -4,6 +4,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import RecordEditorPage from "./pages/RecordEditorPage";
+import RecordViewPage from "./pages/RecordViewPage";
 
 function App() {
   return (
@@ -19,6 +20,14 @@ function App() {
             }
           />
           <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/view"
+            element={
+              <ProtectedRoute>
+                <RecordViewPage />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/editor"
             element={
