@@ -14,16 +14,15 @@ function RecordCard(props) {
   }
 
   return (
-    <div
-      className="text-white bg-neutral-700 p-2 rounded-xl flex justify-around items-center"
-      onClick={handleSelect}
-    >
-      <span className="text-lg">{props.data.title}</span>
-      <span className="text-xs">
-        {new Date(props.data.timestamp).toDateString()}
-      </span>
-      <div>
-        <button className="p-1 mr-4" onClick={handleEdit}>
+    <div className="text-white bg-neutral-700 px-4 py-2 rounded-xl flex justify-between">
+      <div className="grow flex justify-between items-center" onClick={handleSelect}>
+        <span className="text-lg text-ellipsis">{props.data.title}</span>
+        <span className="text-xs whitespace-nowrap">
+          {new Date(props.data.timestamp).toDateString()}
+        </span>
+      </div>
+      <div className="flex flex-nowrap">
+        <button className="p-1 mx-4" onClick={handleEdit}>
           <PencilIcon className="h-6 w-6 text-yellow-400" />
         </button>
         <button className="p-1" onClick={handleDelete}>

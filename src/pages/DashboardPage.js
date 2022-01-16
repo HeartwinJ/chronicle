@@ -55,7 +55,7 @@ function DashboardPage() {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="grid grid-cols-2 gap-2 p-4">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 p-4">
           {posts.map((val, index) => {
             return (
               <RecordCard
