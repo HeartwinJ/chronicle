@@ -1,6 +1,7 @@
 {
   "name": "chronicle",
   "version": "0.1.0",
+  "homepage": "https://heartwinj.gitlab.io/chronicle",
   "private": true,
   "dependencies": {
     "@heroicons/react": "^1.0.5",
