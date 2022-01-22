@@ -6,16 +6,12 @@ cache:
 
 pages:
   script:
-    - echo "Installing Dependencies"
     - npm install
-    - echo "Successfully Installed Dependencies"
-    - echo "Starting Build..."
     - REACT_APP_API_URL=https://chronicle-back-end.herokuapp.com/api
     - npm run build
-    - echo "Build Successful!"
-    - echo "Deploying to server"
-    - mv build public
-    - echo "Deployed to server!"
+    - mv build .public
+    - rm -rf public
+    - mv .public public
   artifacts:
     expire_in: 1 hour
     paths:
