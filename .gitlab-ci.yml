@@ -1,0 +1,24 @@
+image: node:latest
+
+cache:
+  paths:
+    - node_modules/
+
+deploy:
+  script:
+    - echo "Installing Dependencies"
+    - npm install
+    - echo "Successfully Installed Dependencies"
+    - echo "Starting Build..."
+    - REACT_APP_API_URL=https://chronicle-back-end.herokuapp.com/api
+    - npm run build
+    - echo "Build Successful!"
+    - echo "Deploying to server"
+    - mv build public
+    - echo "Deployed to server!"
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - public
+  only:
+    - master
