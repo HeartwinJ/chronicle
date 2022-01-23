@@ -7,7 +7,6 @@ cache:
 pages:
   script:
     - npm install
-    - REACT_APP_API_URL=https://chronicle-back-end.herokuapp.com/api
     - npm run build
     - mv build .public
     - rm -rf public
