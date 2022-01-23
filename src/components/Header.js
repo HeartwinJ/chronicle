@@ -2,11 +2,11 @@ import { LogoutIcon } from "@heroicons/react/outline";
 import { useAuth } from "../common/AuthContext";
 
 function Header() {
-  let auth = useAuth();
+  const auth = useAuth();
 
-  function logout() {
+  const logout = () => {
     auth.signOut();
-  }
+  };
 
   return (
     <div className="w-full bg-neutral-800 p-4 flex justify-between items-center">

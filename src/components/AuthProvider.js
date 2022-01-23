@@ -7,19 +7,19 @@ import AuthService from "../common/AuthService";
 function AuthProvider(props) {
   const navigate = useNavigate();
 
-  let signIn = (password) => {
+  const signIn = (password) => {
     AuthService.signIn(password).then((response) => {
       localStorage.setItem("auth-token", response.data.token);
       navigate("/", { replace: true });
     });
   };
 
-  let signOut = () => {
+  const signOut = () => {
     localStorage.removeItem("auth-token");
     navigate("/");
   };
 
-  let updateAuth = () => {
+  const updateAuth = () => {
     AuthService.updateAuth().then((response) => {
       localStorage.setItem("auth-token", response.data.token);
     });
@@ -37,7 +37,7 @@ function AuthProvider(props) {
     return false;
   };
 
-  let checkAuth = () => {
+  const checkAuth = () => {
     const isLoggedIn = checkToken();
     if (isLoggedIn) {
       updateAuth();
@@ -45,7 +45,7 @@ function AuthProvider(props) {
     return isLoggedIn;
   };
 
-  let contextVal = { signIn, signOut, checkAuth };
+  const contextVal = { signIn, signOut, checkAuth };
 
   return (
     <AuthContext.Provider value={contextVal}>

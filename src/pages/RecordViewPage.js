@@ -25,9 +25,9 @@ function RecordViewPage() {
     }
   }, [navigate, postId]);
 
-  function handleBack() {
+  const handleBack = () => {
     navigate("/");
-  }
+  };
 
   return (
     <div className="bg-neutral-800 h-full flex flex-col">

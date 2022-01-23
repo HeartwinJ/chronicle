@@ -33,7 +33,7 @@ function RecordEditorPage() {
     }
   }, [postId]);
 
-  function onImageUpload(file) {
+  const onImageUpload = (file) => {
     return new Promise((resolve) => {
       const reader = new FileReader();
       reader.onload = (data) => {
@@ -41,31 +41,31 @@ function RecordEditorPage() {
       };
       reader.readAsDataURL(file);
     });
-  }
+  };
 
-  function saveToSession(content) {
+  const saveToSession = (content) => {
     sessionStorage.setItem("content", content);
-  }
+  };
 
-  function loadFromSession() {
+  const loadFromSession = () => {
     return sessionStorage.getItem("content");
-  }
+  };
 
-  function clearFromSession() {
+  const clearFromSession = () => {
     sessionStorage.removeItem("content");
-  }
+  };
 
-  function handleEditorChange({ html, text }) {
+  const handleEditorChange = ({ html, text }) => {
     setContent(text);
     saveToSession(text);
-  }
+  };
 
-  function handleCancel() {
+  const handleCancel = () => {
     clearFromSession();
     navigate("/", { replace: true });
-  }
+  };
 
-  function handleSave(event) {
+  const handleSave = (event) => {
     event.preventDefault();
     const title = new FormData(event.currentTarget).get("title");
 
@@ -80,7 +80,7 @@ function RecordEditorPage() {
         navigate("/", { replace: true });
       });
     }
-  }
+  };
 
   return (
     <div className="bg-neutral-800 h-full flex flex-col">

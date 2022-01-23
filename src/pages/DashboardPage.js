@@ -9,10 +9,6 @@ import RecordCard from "../components/RecordCard";
 function DashboardPage() {
   const navigate = useNavigate();
 
-  function addRecord() {
-    navigate("/editor");
-  }
-
   const [isLoading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
 
@@ -23,22 +19,26 @@ function DashboardPage() {
     });
   }, []);
 
-  function handleSelect(postId) {
+  const addRecord = () => {
+    navigate("/editor");
+  };
+
+  const handleSelect = (postId) => {
     navigate("/view", { state: { id: postId } });
-  }
+  };
 
-  function handleEdit(postId) {
+  const handleEdit = (postId) => {
     navigate("/editor", { state: { id: postId } });
-  }
+  };
 
-  function handleDelete(postId, index) {
+  const handleDelete = (postId, index) => {
     PostsService.deletePost(postId).then(() => {
       navigate("/", { replace: true });
       posts.splice(index, 1);
       const newPostsList = posts.slice();
       setPosts(newPostsList);
     });
-  }
+  };
 
   return (
     <div className="bg-neutral-800 h-full">

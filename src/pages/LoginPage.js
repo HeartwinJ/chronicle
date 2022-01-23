@@ -2,14 +2,14 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../common/AuthContext";
 
 function LoginPage() {
-  let auth = useAuth();
+  const auth = useAuth();
 
-  function handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const password = new FormData(event.currentTarget).get("password");
 
     auth.signIn(password);
-  }
+  };
 
   if (auth.checkAuth()) {
     return <Navigate to="/" replace />;
@@ -21,7 +21,10 @@ function LoginPage() {
         <strong className="text-white text-xl md:text-3xl tracking-[0.5em] font-light">
           CHRONICLE
         </strong>
-        <form className="flex flex-col items-center text-neutral-300" onSubmit={handleSubmit}>
+        <form
+          className="flex flex-col items-center text-neutral-300"
+          onSubmit={handleSubmit}
+        >
           <input
             type="password"
             name="password"

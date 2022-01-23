@@ -1,17 +1,17 @@
 import { PencilIcon, TrashIcon } from "@heroicons/react/outline";
 
 function RecordCard(props) {
-  function handleSelect() {
+  const handleSelect = () => {
     props.onSelect(props.data.id);
-  }
+  };
 
-  function handleEdit() {
+  const handleEdit = () => {
     props.onEdit(props.data.id);
-  }
+  };
 
-  function handleDelete() {
+  const handleDelete = () => {
     props.onDelete(props.data.id, props.index);
-  }
+  };
 
   return (
     <div className="text-white bg-neutral-700 px-4 py-2 rounded-xl flex justify-between">
