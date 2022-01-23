@@ -35,7 +35,7 @@ function RecordViewPage() {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="text-white p-3 h-full flex flex-col">
+        <div className="text-white p-3 h-full flex flex-col overflow-y-auto">
           <div className="flex justify-between mx-3">
             <h1 className="font-black text-4xl">{post.title}</h1>
             <button
@@ -45,12 +45,14 @@ function RecordViewPage() {
               Back
             </button>
           </div>
-          <ReactMarkdown
-            className="my-3 mx-5 p-4 bg-neutral-900 custom-html-style"
-            remarkPlugins={[remarkGfm]}
-          >
-            {post.content}
-          </ReactMarkdown>
+          <div className="my-3 mx-5 p-4 bg-neutral-900 flex-grow">
+            <ReactMarkdown
+              className="custom-html-style h-full"
+              remarkPlugins={[remarkGfm]}
+            >
+              {post.content}
+            </ReactMarkdown>
+          </div>
         </div>
       )}
     </div>
