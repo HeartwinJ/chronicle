@@ -27,6 +27,8 @@ function RecordEditorPage() {
         setLoading(false);
       });
     } else {
+      const content = loadFromSession();
+      setContent(content ? content : "");
       setLoading(false);
     }
   }, [postId]);
@@ -41,11 +43,25 @@ function RecordEditorPage() {
     });
   }
 
+  function saveToSession(content) {
+    sessionStorage.setItem("content", content);
+  }
+
+  function loadFromSession() {
+    return sessionStorage.getItem("content");
+  }
+
+  function clearFromSession() {
+    sessionStorage.removeItem("content");
+  }
+
   function handleEditorChange({ html, text }) {
     setContent(text);
+    saveToSession(text);
   }
 
   function handleCancel() {
+    clearFromSession();
     navigate("/", { replace: true });
   }
 
@@ -55,10 +71,12 @@ function RecordEditorPage() {
 
     if (postId) {
       PostsService.editPost(postId, title, content).then(() => {
+        clearFromSession();
         navigate("/", { replace: true });
       });
     } else {
       PostsService.addPost(title, content).then(() => {
+        clearFromSession();
         navigate("/", { replace: true });
       });
     }
