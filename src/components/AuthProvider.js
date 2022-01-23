@@ -37,9 +37,9 @@ function AuthProvider(props) {
     return false;
   };
 
-  const checkAuth = () => {
+  const checkAuth = (shouldUpdate = true) => {
     const isLoggedIn = checkToken();
-    if (isLoggedIn) {
+    if (isLoggedIn && shouldUpdate) {
       updateAuth();
     }
     return isLoggedIn;
