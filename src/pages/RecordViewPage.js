@@ -47,7 +47,7 @@ function RecordViewPage() {
           </div>
           <ReactMarkdown
             className="my-3 mx-5 p-4 bg-neutral-900 custom-html-style"
-            remarkPlugins={remarkGfm}
+            remarkPlugins={[remarkGfm]}
           >
             {post.content}
           </ReactMarkdown>
