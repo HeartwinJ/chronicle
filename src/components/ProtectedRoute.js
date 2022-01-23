@@ -8,7 +8,6 @@ function ProtectedRoute(props) {
 
   useEffect(() => {
     const authRefreshInterval = setInterval(() => {
-      console.log("Auth Refresh");
       if (!auth.checkAuth(false)) {
         navigate("/login", { replace: true });
       }
