@@ -1,14 +1,21 @@
+import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../common/AuthContext";
+import Loader from "../components/Loader";
 
 function LoginPage() {
   const auth = useAuth();
+  const [isLoading, setLoading] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     const password = new FormData(event.currentTarget).get("password");
 
-    auth.signIn(password);
+    const authStatus = await auth.signIn(password);
+    if (!authStatus) {
+      setLoading(false);
+    }
   };
 
   if (auth.checkAuth()) {
@@ -32,9 +39,14 @@ function LoginPage() {
           ></input>
           <button
             type="submit"
-            className="bg-neutral-800 rounded-xl mt-5 py-2 px-6 tracking-widest"
+            className="bg-neutral-800 rounded-xl mt-5 py-2 px-6"
+            disabled={isLoading}
           >
-            OPEN
+            {isLoading ? (
+              <Loader size="6" />
+            ) : (
+              <span className="tracking-widest">OPEN</span>
+            )}
           </button>
         </form>
       </div>

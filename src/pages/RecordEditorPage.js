@@ -16,6 +16,7 @@ function RecordEditorPage() {
   const postId = state ? state.id : null;
 
   const [isLoading, setLoading] = useState(true);
+  const [isSaveLoading, setSaveLoading] = useState(false);
   const [title, setTitle] = useState("Entry for " + new Date().toDateString());
   const [content, setContent] = useState("");
 
@@ -67,18 +68,27 @@ function RecordEditorPage() {
 
   const handleSave = (event) => {
     event.preventDefault();
+    setSaveLoading(true);
     const title = new FormData(event.currentTarget).get("title");
 
     if (postId) {
-      PostsService.editPost(postId, title, content).then(() => {
-        clearFromSession();
-        navigate("/", { replace: true });
-      });
+      PostsService.editPost(postId, title, content)
+        .then(() => {
+          clearFromSession();
+          navigate("/", { replace: true });
+        })
+        .catch((err) => {
+          setSaveLoading(false);
+        });
     } else {
-      PostsService.addPost(title, content).then(() => {
-        clearFromSession();
-        navigate("/", { replace: true });
-      });
+      PostsService.addPost(title, content)
+        .then(() => {
+          clearFromSession();
+          navigate("/", { replace: true });
+        })
+        .catch((err) => {
+          setSaveLoading(false);
+        });
     }
   };
 
@@ -116,10 +126,17 @@ function RecordEditorPage() {
             </button>
             <button
               type="submit"
-              className="text-white bg-neutral-700 py-3 pl-3 pr-4 mr-16 rounded-xl flex items-center"
+              className="text-white bg-neutral-700 py-3 pl-3 pr-4 mr-16 rounded-xl"
+              disabled={isSaveLoading}
             >
-              <SaveIcon className="h-6 w-6 mr-2" />
-              <span>Save</span>
+              {isSaveLoading ? (
+                <Loader size="6" />
+              ) : (
+                <div className="flex items-center">
+                  <SaveIcon className="h-6 w-6 mr-2" />
+                  <span>Save</span>
+                </div>
+              )}
             </button>
           </div>
         </form>

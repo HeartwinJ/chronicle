@@ -7,11 +7,16 @@ import AuthService from "../common/AuthService";
 function AuthProvider(props) {
   const navigate = useNavigate();
 
-  const signIn = (password) => {
-    AuthService.signIn(password).then((response) => {
+  const signIn = async (password) => {
+    try {
+      const response = await AuthService.signIn(password);
       localStorage.setItem("auth-token", response.data.token);
       navigate("/", { replace: true });
-    });
+    } catch (error) {
+      console.error("Authentication Failed!");
+      console.error(error);
+      return false;
+    }
   };
 
   const signOut = () => {
